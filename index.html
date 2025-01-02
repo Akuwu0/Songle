@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Songle</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="h-screen grid grid-flow-row bg-purple-100">
+    
+        <!-- Cabecera -->
+        <header class="row-span-1 bg-purple-300">
+            <div class="h-full text-center content-center">
+            <h1 class="text-3xl font-bold mb-2">Songle</h1>
+            <p>Pon a prueba tu conocimiento musical</p>
+            </div>
+        </header>
+
+        <div class="mx-auto container row-span-12">
+            <!-- Contenido Principal -->
+            <main class="h-full flex flex-col justify-center">
+                <section class="mb-16 text-center">
+                <h2 class="text-2xl">Bienvenido al Juego</h2>
+                <p class="">
+                    ¿Crees que puedes identificar una canción solo con un fragmento de su letra? 
+                    ¡Descubre si eres un verdadero fanático de la música!
+                </p>
+                <button id="btn_comenzar" class="m-4 p-2 bg-green-500"> Comenzar a Jugar </button>
+                </section>
+
+                <section class="mx-auto">
+                <h3 class="text-2xl text-center mb-4">Instrucciones</h3>
+                <ul class="list-disc">
+                    <li>Escucha un fragmento y lee la letra proporcionada.</li>
+                    <li>Adivina el nombre de la canción correctamente.</li>
+                    <li>Compite contigo mismo para lograr la mejor puntuación.</li>
+                </ul>
+                </section>
+            </main>
+        </div>
+
+        <!-- Pie de página -->
+        <footer class="row-span-1 bg-purple-300">
+            <div class="h-full text-center content-end">
+            <p class="">
+                Creado por Akuwu. © 2025. Todos los derechos reservados.
+            </p>
+            <p> Encuentra más en mi <span class="text-white"><a href="https://github.com/Akuwu0/Songle.git" target="_blank" class=""> repositorio de GitHub </a></span>. </p>
+            </div>
+        </footer>
+
+
+        <script src="./js/script.js"></script>
+</body>
+</html>
