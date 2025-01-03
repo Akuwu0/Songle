@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Songle</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="h-screen grid grid-flow-row bg-purple-100">
+    
+        <!-- Cabecera -->
+        <header class="row-span-1 bg-purple-300">
+            <div class="h-full text-center content-center">
+            <h1 class="text-3xl font-bold mb-2">Songle</h1>
+            <p>Pon a prueba tu conocimiento musical</p>
+            </div>
+        </header>
+        <!-- Menú de Navegación -->
+        <nav class="p-4 mb-8">
+            <ul class="flex justify-evenly">
+            <li><a id="juego" class="text-blue-600 font-semibold hover:underline">Jugar</a></li>
+            <li><a id="seleccion" class="text-blue-600 font-semibold hover:underline">Playlists</a></li>
+            </ul>
+        </nav>
+
+        <div class="mx-auto container row-span-12">
+            <!-- Contenido Principal -->
+            <main class="h-full flex flex-col justify-center">
+                
+  
+                <!-- Sección del Juego -->
+                <section id="juego_section" class="mb-10 text-center hidden">
+                    <h2 class="text-3xl font-semibold mb-4">¡Adivina la Canción!</h2>
+                    <div class="bg-white p-6 rounded shadow-md">
+                    <p class="text-lg mb-4">Escucha el fragmento y lee la letra:</p>
+                    <audio controls class="mb-4 mx-auto">
+                        <source src="" type="audio/mpeg">
+                    </audio>
+                    <p class="text-lg italic bg-gray-100 p-4 rounded">"Letra parcial de la canción aquí..."</p>
+                    <input type="text" placeholder="Escribe tu respuesta aquí" class="border border-gray-300 p-2 rounded w-full mt-4"/>
+                    <button class="bg-green-500 text-white font-semibold py-2 px-4 rounded mt-4 hover:bg-green-700 transition-all">Comprobar Respuesta</button>
+                    </div>
+                </section>
+
+
+                <!-- Galería -->
+                <section id="playlist" class="mb-10">
+                    <h2 class="text-3xl font-semibold mb-4">Selecciona una Playlist</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <!-- Playlist 1 -->
+                        <div>
+                            <div class="bg-white rounded shadow-md overflow-hidden">
+                            <img id="playlist_1" alt="Top 50: España" class="w-full h-40 object-cover playlistDiv transition-all">
+                            </div>
+                            <div class="p-4 text-center">
+                            <h3 class="text-lg font-bold">Top 50: España</h3>
+                            </div>
+                        </div>
+                    <!-- Playlist 2 -->
+
+                    <div>
+                        <div class="bg-white rounded shadow-md overflow-hidden">
+                            <img id="playlist_2" alt="Rock Español" class="w-full h-40 object-cover playlistDiv transition-all">
+                            </div>
+                            <div class="p-4 text-center">
+                            <h3 class="text-lg font-bold">Rock Español</h3>
+                            
+                        </div>
+                    </div>
+                    <!-- Playlist 3 -->
+
+                    <div>
+
+                        <div class="bg-white rounded shadow-md overflow-hidden">
+                            <img id="playlist_3" alt="Top Global" class="w-full h-40 object-cover playlistDiv transition-all">
+                            </div>
+                            <div class="p-4 text-center">
+                            <h3 class="text-lg font-bold">Top 100: Global</h3>
+                            
+                            
+                        </div>
+                    </div>
+                    <!-- Playlists 4 -->
+                    <div>
+
+                        <div class="bg-white rounded shadow-md overflow-hidden">
+                            <img id="playlist_4" alt="Indie Español" class="w-full h-40 object-cover playlistDiv transition-all">
+                            </div>
+                            <div class="p-4 text-center">
+                            <h3 class="text-lg font-bold">Indie Español</h3>
+                            
+                            
+                        </div>
+                    </div>
+
+                    <!-- Playlists 5 -->
+
+                        <div>
+                            <div class="bg-white rounded shadow-md overflow-hidden">
+                                <img id="playlist_5" alt="Urbano 2025" class="w-full h-40 object-cover playlistDiv transition-all">
+                                
+                            </div>
+                            <div class="p-4 text-center">
+                                <h3 class="text-lg font-bold">Urbano 2025</h3>
+                           </div>
+                        </div>
+
+                    <!-- Playlist 6 -->
+
+                    <div>
+                        <div class="bg-white rounded shadow-md overflow-hidden">
+                            <img id="playlist_6" alt="Clasicos de Jazz" class="w-full h-40 object-cover playlistDiv transition-all">
+                            </div>
+                            <div class="p-4 text-center">
+                            <h3 class="text-lg font-bold">Clasicos de Jazz</h3>
+                            
+                            
+                        </div>
+                    </div>
+
+                    <!-- Playlist 7 -->
+
+                    <div>
+
+                        <div class="bg-white rounded shadow-md overflow-hidden">
+                            <img id="playlist_7" alt="Heavy" class="w-full h-40 object-cover playlistDiv transition-all">
+                            </div>
+                            <div class="p-4 text-center">
+                            <h3 class="text-lg font-bold">Heavy</h3>
+                            
+                            
+                        </div>
+                    </div>
+                    <!-- Playlists 8 -->
+                    <div>
+
+                        <div class="bg-white rounded shadow-md overflow-hidden">
+                            <img id="playlist_8" alt="Reggaeton Antiguo" class="w-full h-40 object-cover playlistDiv transition-all">
+                            </div>
+                            <div class="p-4 text-center">
+                            <h3 class="text-lg font-bold">Reggaeton Antiguo</h3>
+                            
+                            
+                        </div>
+                    </div>
+
+                    
+                    </div>
+                    <button id="btn_seleccionar" class="bg-green-500 text-white font-semibold py-2 px-4 rounded mt-4 hover:bg-green-700 transition-all w-full">Seleccionar</button>
+                </section>
+  
+            </main>
+        </div>
+
+        <!-- Pie de página -->
+        <footer class="row-span-1 bg-purple-300">
+            <div class="h-full text-center content-end">
+            <p class="">
+                Creado por Akuwu. © 2025. Todos los derechos reservados.
+            </p>
+            <p> Encuentra más en mi <span class="text-white"><a href="https://github.com/Akuwu0/Songle.git" target="_blank" class=""> repositorio de GitHub </a></span>. </p>
+            </div>
+        </footer>
+
+    
+        <script src="./../js/script.js"></script>
+        <script type="module" src="./../js/spotify.js"></script>
+</body>
+</html>
