@@ -2,6 +2,7 @@ import spotifyConfig from './spotifyConfig.js';
 
 let accessToken = "";
 
+let imagesPlaylists = document.querySelectorAll('.playlistDiv');
 
 const playlist_ids = [
     '3LnKnLXFIA7lEAbV0YROL4',
@@ -15,7 +16,7 @@ const playlist_ids = [
 ];
 
 
-async function getAccessToken(){
+const getAccessToken = async () => {
     const clientId = spotifyConfig.clientId; 
     const clientSecret = spotifyConfig.clientSecret; 
   
@@ -30,7 +31,7 @@ async function getAccessToken(){
   
     if (respuesta.ok) {
         const data = await respuesta.json();
-        accessToken = data.access_token; 
+        accessToken = data.access_token;
         return accessToken;
     } else {
         console.log("Error al obtener el token de acceso");
@@ -78,6 +79,28 @@ async function displayPlaylistDetails() {
     }
 }
 
+export const cancionAleatoria = async (numList) => {
+    let artist = [];
+    let idPlay = playlist_ids[numList-1];
+    let playlist =await getPlaylistDetails(idPlay);
+    let cantidad = playlist.tracks.items.length-1;
+    let numSong = Math.floor(Math.random() * cantidad);
+    let track = playlist.tracks.items[numSong].track;
+    let artistas = track.artists;
+    artistas.forEach(artista => {
+        artist.push(artista.name);
+    });
+    let solucion = track.name.split('(')[0];
+    let year = track.album.release_date.split('-')[0];
+    let idTrack = track.id;
+    let cancion = {
+        'solucion' : solucion,
+        'year' : year,
+        'artists' : artist,
+        'idTrack' : idTrack
+    }
+    return cancion;
+}
 
 // Ejecutar la función al cargar la página
 document.addEventListener("DOMContentLoaded", displayPlaylistDetails);
