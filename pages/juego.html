@@ -31,8 +31,8 @@
                 <section id="juego_section" class="mb-10 text-center hidden">
                     <h2 class="text-3xl font-semibold mb-4">¡Adivina la Canción!</h2>
                     <div class="bg-white p-6 rounded shadow-md">
+                        <div id="embed-iframe" class=""></div>
                         <p class="text-lg mb-4">Lee la letra:</p>
-                        <div id="embed-iframe" class="hidden"></div>
                         <p id="letra" class="text-lg italic bg-gray-100 p-4 rounded">"Letra parcial de la canción aquí..."</p>
                         <input id="respuesta" type="text" placeholder="Escribe tu respuesta aquí" class="border border-gray-300 p-2 rounded w-full mt-4"/>
                         <button id="comprobar" class="bg-green-500 text-white font-semibold py-2 px-4 rounded mt-4 hover:bg-green-700 transition-all">Comprobar Respuesta</button>
@@ -137,6 +137,7 @@
 
         <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
         <script type="module" src="./../js/script.js"></script>
+        <script type="module" src="./../js/lyrics.js"></script>
         <script type="module" src="./../js/spotify.js"></script>
 </body>
 </html>

@@ -1,4 +1,6 @@
 import { cancionAleatoria } from "./spotify.js";
+import { getLetraCancion } from "./lyrics.js";
+
 
 let juego = document.getElementById('juego');
 let seleccion = document.getElementById('seleccion');
@@ -7,9 +9,8 @@ let playlist = document.getElementById('playlist');
 // declaracion elementos playlist
 let imagesPlaylists = document.querySelectorAll('.playlistDiv');
 let btn_seleccionar = document.getElementById('btn_seleccionar');
-let audio = document.getElementById('audio');
-
-
+let letra = document.getElementById('letra');
+const element = document.getElementById('embed-iframe');
 
 
 let seleccionado = false;
@@ -44,39 +45,42 @@ const seleccionarPlaylist = (event) => {
     seleccionado = true;
 }
 
+let track;
 let juegoEmpezado = false;
 const comenzarJuego = async () => {
     if (seleccionado) {
+        letra.textContent = '"Letra parcial de la canción aquí..."';
         juegoEmpezado = true;
         juego_section.classList.remove('hidden');
         playlist.classList.add('hidden');
 
-        // Obtener el track seleccionado aleatorio
         let list = anterior.id.split('_')[1];
-        let track = await cancionAleatoria(list);  // Esperar la canción aleatoria
+        track = await cancionAleatoria(list);  // Esperar la canción aleatoria
 
-        // Crear el iframe con la URL de Spotify y parámetros para minimizar la información
         const iframe = document.createElement('iframe');
-        iframe.src = `https://open.spotify.com/embed/track/${track.idTrack}?utm_source=generator&theme=0&view=detail`; // Usar el tema oscuro y minimizar información
+        iframe.src = `https://open.spotify.com/embed/track/${track.idTrack}?utm_source=generator&theme=0&view=detail`; 
         iframe.width = '100%';
         iframe.height = '80';
-        iframe.style.border = 'none'; // Usar CSS para manejar el borde
-        iframe.allow = 'encrypted-media'; // Permitir medios cifrados
+        iframe.style.border = 'none'; 
+        iframe.allow = 'encrypted-media'; 
         iframe.allowTransparency = 'true';
-
-        // Insertar el iframe en el contenedor
-        const element = document.getElementById('embed-iframe');
-        element.innerHTML = ''; // Limpiar el contenedor antes de agregar el nuevo iframe
+        element.innerHTML = '';
         element.appendChild(iframe);
 
-        // Opcional: Agregar lógica para cambiar de track si se hace clic en un botón
-        document.querySelectorAll('.track').forEach(trackElement => {
-            trackElement.addEventListener('click', () => {
-                iframe.src = `https://open.spotify.com/embed/track/${trackElement.dataset.spotifyId}?utm_source=generator&theme=0&view=detail`;
-            });
-        });
+        getLetras();
     }
 };
+
+const getLetras = async () => {
+    // Llamamos a la función para obtener la letra de la canción
+    const lyrics = await getLetraCancion(track);
+    if (lyrics == -1) {
+        comenzarJuego();
+    }else{
+        letra.textContent = lyrics.slice(0, Math.floor(lyrics.length * 0.25)) + "...";
+    }
+
+  };
 
 
 juego.addEventListener('click', mostrarJuego);
