@@ -10,7 +10,7 @@ export const getLetraCancion = async (track) => {
             // Configuramos el timeout para devolver -1 después de 5 segundos
             timeout = setTimeout(() => {
                 reject(-1);  // Si pasa el tiempo, rechazamos la promesa con -1
-            }, 5000);
+            }, 1000);
 
             // Realiza la búsqueda de la canción en Lyrics.ovh
             const response = await fetch(`https://api.lyrics.ovh/v1/${encodeURIComponent(artist[0])}/${encodeURIComponent(songTitle)}`);

@@ -29,13 +29,29 @@
                 
                 <!-- Sección del Juego -->
                 <section id="juego_section" class="mb-10 text-center hidden">
+                    <div>
+                        <h2 class="text-5xl font-bold mb-24 text-purple-800">Puntuación: <span id="puntuacion" >00</span></h2>
+                    </div>
                     <h2 class="text-3xl font-semibold mb-4">¡Adivina la Canción!</h2>
                     <div class="bg-white p-6 rounded shadow-md">
+                        <div class="flex justify-between">
+                            <p class="text-2xl text-bold text-purple-500">Tu record: <span id="record"></span></p>
+                            <div id="lives" class="flex m-4 mt-0">
+                                <img alt="5" src="./../assets/images/Heart.png" class="w-12 p-2">
+                                <img alt="4" src="./../assets/images/Heart.png" class="w-12 p-2">
+                                <img alt="3" src="./../assets/images/Heart.png" class="w-12 p-2">
+                                <img alt="2" src="./../assets/images/Heart.png" class="w-12 p-2">
+                                <img alt="1" src="./../assets/images/Heart.png" class="w-12 p-2">
+                            </div>
+                        </div>
                         <div id="embed-iframe" class=""></div>
+                        <p id="pista" class="hidden text-xl font-semibold text-green-400">Artista/s: </p>
                         <p class="text-lg mb-4">Lee la letra:</p>
                         <p id="letra" class="text-lg italic bg-gray-100 p-4 rounded">"Letra parcial de la canción aquí..."</p>
-                        <input id="respuesta" type="text" placeholder="Escribe tu respuesta aquí" class="border border-gray-300 p-2 rounded w-full mt-4"/>
+                        <input id="respuesta" type="text" placeholder="Escribe tu respuesta aquí (Recuerda poner las tíldes)" class="border border-gray-300 p-2 rounded w-full mt-4"/>
                         <button id="comprobar" class="bg-green-500 text-white font-semibold py-2 px-4 rounded mt-4 hover:bg-green-700 transition-all">Comprobar Respuesta</button>
+                        <button id="otraVez" class="bg-green-500 text-white font-semibold py-2 px-4 rounded mt-4 hover:bg-green-700 transition-all hidden">Jugar Otra Vez</button>
+                        <button id="cambiarList" class="bg-green-500 text-white font-semibold py-2 px-4 rounded mt-4 hover:bg-green-700 transition-all hidden">Cambiar Playlist</button>
                     </div>
                 </section>
 

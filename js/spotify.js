@@ -5,15 +5,15 @@ let accessTokenExpiration = 0; // Timestamp para verificar si el token ha expira
 
 let imagesPlaylists = document.querySelectorAll('.playlistDiv');
 const playlist_ids = [
-    '3LnKnLXFIA7lEAbV0YROL4',
-    '6EhNUv3qCmv6FlTmKsxPBh',
-    '0sDahzOkMWOmLXfTMf2N4N',
-    '4lKOBXoYWsEBLyZkzNmnfP',
-    '2DNLQuVm2SepjFP2ZLVksD',
-    '2uGtHlsrXprWFdIf7jqYsV',
-    '27gN69ebwiJRtXEboL12Ih',
-    '0X1ZraHn4xlPchQ0fJP2qg'
-];
+    "3LnKnLXFIA7lEAbV0YROL4",
+    "6EhNUv3qCmv6FlTmKsxPBh",
+    "0sDahzOkMWOmLXfTMf2N4N",
+    "4lKOBXoYWsEBLyZkzNmnfP",
+    "2DNLQuVm2SepjFP2ZLVksD",
+    "2uGtHlsrXprWFdIf7jqYsV",
+    "27gN69ebwiJRtXEboL12Ih",
+    "0X1ZraHn4xlPchQ0fJP2qg"
+]
 
 // Obtener el Access Token
 const getAccessToken = async () => {
