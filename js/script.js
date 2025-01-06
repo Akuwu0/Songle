@@ -19,6 +19,8 @@ let respuesta = document.getElementById('respuesta');
 let pista = document.getElementById('pista');
 let lives = document.getElementById('lives');
 let record = document.getElementById('record');
+let introducir = document.getElementById('introducir');
+
 
 let seleccionado = false;
 const mostrarJuego = () => {
@@ -72,6 +74,7 @@ const comenzarJuego = async () => {
         juego_section.classList.remove('hidden');
         playlist.classList.add('hidden');
         pista.classList.add('hidden');
+        respuesta.focus();
 
         let list = anterior.id.split('_')[1];
         track = await cancionAleatoria(list);  // Esperar la canción aleatoria
@@ -105,36 +108,45 @@ const getLetras = async () => {
 
 let fallos = 0;
 const comprobarSolucion = () => {
-    if(solucion.trim().toLowerCase() == respuesta.value.trim().toLowerCase() ){
-        element.classList.remove('hidden');
-        letra.textContent = 'CORRECTO!!!!';
-        let puntos = '0'+ (parseInt(puntuacion.textContent) +1);
-        puntuacion.textContent = puntos.slice(-2);
-        fallos = 0;
-        respuesta.value = "";
-        mostrarBotones();
-        guardarRecord(puntos);
-    }else{
-        fallos++;
-        if(fallos == 2)
-            letra.textContent = lyrics.slice(0, Math.floor(lyrics.length * .5)) + "...";
-        if(fallos == 3){
-            pista.textContent = pista.textContent + (track.artists.length ==1 )? String(track.artists).replace('[', '').replace(']', '').replace('"', ''): track.artists.join(', ').replace('[', '').replace(']', '').replace('"', '');
-            pista.classList.remove('hidden');
-        }
-        if(fallos == 4)
-            letra.textContent = lyrics;
-        if(fallos == 5){
+    if(respuesta.value.trim() != ''){
+        introducir.classList.add('hidden');
+        if(solucion.trim().toLowerCase() == respuesta.value.trim().toLowerCase() ){
             element.classList.remove('hidden');
-            letra.textContent = 'Has perdidoo!!!! Tu puntuacion ha sido: '+puntuacion.textContent;
-            respuesta.value = "";
+            letra.textContent = 'CORRECTO!!!!';
+            let puntos = '0'+ (parseInt(puntuacion.textContent) +1);
+            puntuacion.textContent = puntos.slice(-2);
             fallos = 0;
-            puntuacion.textContent = '00';
+            respuesta.value = "";
+            respuesta.classList.remove('outline-red-400');
             mostrarBotones();
+            guardarRecord(puntos);
+        }else{
+            fallos++;
+            respuesta.classList.add('outline-red-400');
+            respuesta.focus();
+            if(fallos == 2)
+                letra.textContent = lyrics.slice(0, Math.floor(lyrics.length * .5)) + "...";
+            if(fallos == 3){
+                pista.textContent = pista.textContent + (track.artists.length ==1 )? String(track.artists).replace('[', '').replace(']', '').replace('"', ''): track.artists.join(', ').replace('[', '').replace(']', '').replace('"', '');
+                pista.classList.remove('hidden');
+            }
+            if(fallos == 4)
+                letra.textContent = lyrics;
+            if(fallos == 5){
+                element.classList.remove('hidden');
+                letra.textContent = 'Has perdidoo!!!! Tu puntuacion ha sido: '+puntuacion.textContent;
+                respuesta.value = "";
+                fallos = 0;
+                puntuacion.textContent = '00';
+                respuesta.classList.remove('outline-red-400');
+                mostrarBotones();
+            }
+            cambiarVidas(fallos == 0? 5 : fallos);
         }
-        cambiarVidas(fallos == 0? 5 : fallos);
+        mostrarRecord();
+    }else{
+        introducir.classList.remove('hidden');
     }
-    mostrarRecord();
 }
 
 const cambiarVidas = (fallos) => {
@@ -169,6 +181,8 @@ const cambiarList = () => {
     anterior.classList.remove('border');
     anterior.classList.remove('border-8');
     anterior.classList.remove('border-green-500');
+    anterior = "";
+    seleccionado = false;
     juego_section.classList.add('hidden');
     playlist.classList.remove('hidden');
 }
