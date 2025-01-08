@@ -1,4 +1,5 @@
 export const getLetraCancion = async (track) => {
+    console.log(track.artists)
     const artist = track.artists;
     const songTitle = track.solucion;
 

@@ -1,12 +1,13 @@
+// imports
 import { cancionAleatoria } from "./spotify.js";
 import { getLetraCancion } from "./lyrics.js";
 
 
+// declaracion elementos
 let juego = document.getElementById('juego');
 let seleccion = document.getElementById('seleccion');
 let juego_section = document.getElementById('juego_section');
 let playlist = document.getElementById('playlist');
-// declaracion elementos playlist
 let imagesPlaylists = document.querySelectorAll('.playlistDiv');
 let btn_seleccionar = document.getElementById('btn_seleccionar');
 let letra = document.getElementById('letra');
@@ -22,6 +23,7 @@ let record = document.getElementById('record');
 let introducir = document.getElementById('introducir');
 
 
+// funcion para intercambiar la clase 'hidden', mostrando y ocultando distintas vistas
 let seleccionado = false;
 const mostrarJuego = () => {
     if(seleccionado && juegoEmpezado){
@@ -30,11 +32,13 @@ const mostrarJuego = () => {
     }
 }
 
+// funcion para intercambiar la clase 'hidden', mostrando y ocultando distintas vistas
 const mostrarPlaylists = () => {
     playlist.classList.remove('hidden');
     juego_section.classList.add('hidden')
 }
 
+// funcion para marcar la playlist seleccionada y desmarcar la anterior seleccionada cuando hay una nueva.
 let anterior = "";
 const seleccionarPlaylist = (event) => {
     if(cambiarPlaylist){
@@ -56,44 +60,54 @@ const seleccionarPlaylist = (event) => {
     }
 }
 
+
+// funcion para comenzar el juego, getletras se llama dentro de getifra me, 
+// porque si se pone dentro de esta funcion da error.
 let track;
 let solucion;
 let cambiarPlaylist = true;
 let juegoEmpezado = false;
-const comenzarJuego = async () => {
+const comenzarJuego = () => {
     if (seleccionado) {
+        juegoEmpezado = true;
         cambiarPlaylist = false;
         btn_seleccionar.disabled=true;
         iniciarRecord();
         mostrarRecord();
         restablecerVidas();
         ocultarBotones();
-
-        letra.textContent = '"Letra parcial de la canción aquí..."';
-        juegoEmpezado = true;
-        juego_section.classList.remove('hidden');
-        playlist.classList.add('hidden');
-        pista.classList.add('hidden');
-        respuesta.focus();
-
-        let list = anterior.id.split('_')[1];
-        track = await cancionAleatoria(list);  // Esperar la canción aleatoria
-        solucion = track.solucion;
-        const iframe = document.createElement('iframe');
-        iframe.src = `https://open.spotify.com/embed/track/${track.idTrack}?utm_source=generator&theme=0&view=detail`; 
-        iframe.width = '100%';
-        iframe.height = '80';
-        iframe.style.border = 'none'; 
-        iframe.allow = 'encrypted-media'; 
-        iframe.allowTransparency = 'true';
-        element.innerHTML = '';
-        element.classList.add('hidden');
-        element.appendChild(iframe);
-
-        getLetras();
+        mostrarJuego();
+        reinicioSectionJuego();
+        getIframe();
     }
 };
 
+// funcion para reiniciar el menu del juego cuando comenzamod a jugar
+const reinicioSectionJuego = () => {
+    letra.textContent = '"Letra parcial de la canción aquí..."';
+    pista.classList.add('hidden');
+    respuesta.focus();
+}
+
+// funcion para agregar el iframe de la cancion de spotify
+const getIframe = async () => {
+    let list = anterior.id.split('_')[1];
+    track = await cancionAleatoria(list);  // Esperar la canción aleatoria
+    solucion = track.solucion;
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://open.spotify.com/embed/track/${track.idTrack}?utm_source=generator&theme=0&view=detail`; 
+    iframe.width = '100%';
+    iframe.height = '80';
+    iframe.style.border = 'none'; 
+    iframe.allow = 'encrypted-media'; 
+    iframe.allowTransparency = 'true';
+    element.innerHTML = '';
+    element.classList.add('hidden');
+    element.appendChild(iframe);
+    getLetras();
+}
+
+// funcion para hacer la peticion de las letras a la api
 let lyrics;
 const getLetras = async () => {
     // Llamamos a la función para obtener la letra de la canción
@@ -103,9 +117,9 @@ const getLetras = async () => {
     }else{
         letra.textContent = lyrics.slice(0, Math.floor(lyrics.length * .25)) + "...";
     }
-
   };
 
+// funcion para cambiar la imagen de las vidas, y comprobar si has gabnado o has fallado.
 let fallos = 0;
 const comprobarSolucion = () => {
     if(respuesta.value.trim() != ''){
@@ -149,6 +163,7 @@ const comprobarSolucion = () => {
     }
 }
 
+// funcion para cambiar la imagen a un fallo
 const cambiarVidas = (fallos) => {
     let imgs = lives.childNodes;
     imgs.forEach(img => {
@@ -157,6 +172,7 @@ const cambiarVidas = (fallos) => {
     })
 }
 
+// funcion para volver a poner todos los corazones
 const restablecerVidas = () => {
     let imgs = lives.childNodes;
     imgs.forEach(img => {
@@ -164,17 +180,21 @@ const restablecerVidas = () => {
     })
 }
 
+// funcion para mostrar los botones tras acertar o quedarte sin oportunidades al adivinar una cancion
 const mostrarBotones = () => {
     btn_changeList.classList.remove('hidden');
     btn_otraVez.classList.remove('hidden');
     btn_comprobar.classList.add('hidden');
 }
+
+// funcion para ocultar los botones de volver a jugar o de cambiar playlist
 const ocultarBotones = () => {
     btn_changeList.classList.add('hidden');
     btn_otraVez.classList.add('hidden');
     btn_comprobar.classList.remove('hidden');
 }
 
+// funcion para cuando quiewres seguir jugando `pero cambiando la playlist
 const cambiarList = () => {
     btn_seleccionar.disabled=false;
     cambiarPlaylist = true;
@@ -187,15 +207,18 @@ const cambiarList = () => {
     playlist.classList.remove('hidden');
 }
 
+// funcion para iniciar record en el localStorage del usuario
 const iniciarRecord = () => {
     if (localStorage.getItem('record') == null) localStorage.setItem('record', 0);
 }
 
+// funcion para mostrar el record
 const mostrarRecord = () => {
     let recordGuardado = localStorage.getItem('record');
     record.textContent = recordGuardado==0? '00' :  ('0' + recordGuardado).slice(-2);
 }
 
+// funcion para guardar el record
 const guardarRecord = (puntos) => {
     let recordGuardado = localStorage.getItem('record');
 
@@ -208,6 +231,8 @@ const guardarRecord = (puntos) => {
     }
 }
 
+
+// eventos
 juego.addEventListener('click', mostrarJuego);
 seleccion.addEventListener('click', mostrarPlaylists);
 imagesPlaylists.forEach((image) => {
